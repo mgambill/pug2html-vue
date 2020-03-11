@@ -1,12 +1,10 @@
 <template lang="pug">
-.wrapper.flex.h-screen.bg-gray-50
-  section(ref="left")
-    .h-full.flex-grow-1
-      slot(name="left")
+div(style="background-color: #1e1e1e")
+  article(ref="left")
+    slot(name="left")
 
-  section(ref="right")
-    .h-full.flex-grow-1
-      slot(name="right")
+  article(ref="right")
+    slot(name="right")
 </template>
 
 <script>
@@ -14,7 +12,22 @@ export default {
   name: "SplitPanel",
   mounted() {
     //eslint-disable-next-line
-    Split([this.$refs.left, this.$refs.right], { minSize: 0 });
+    Split([this.$refs.left, this.$refs.right], {
+      sizes: [25, 75],
+      minSize: 0,
+      onDragEnd: this.onDragEnd
+    });
+  },
+  methods: {
+    onDragEnd(e) {
+      this.$emit("change", e);
+    },
+    left() {
+      return this.$refs.left;
+    },
+    right() {
+      return this.$refs.right;
+    }
   }
 };
 </script>
@@ -23,9 +36,9 @@ export default {
 <style>
 .gutter {
   cursor: e-resize;
-  background: #a6a9b7;
+  background: #191818;
 }
 .gutter:hover {
-  background: #5a5f73;
+  background: #3c3b3b;
 }
 </style>

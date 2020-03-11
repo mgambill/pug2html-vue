@@ -1,10 +1,8 @@
 <template lang="pug">
-#app.bg-blue-900
-  #nav
-    router-link(to='/') Home
-    |  |
-    router-link(to='/about') About
-  router-view
+#app
+  AppNavbar
+  section
+    router-view
 
 </template>
 
@@ -12,4 +10,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  height: 100vh;
+}
 </style>
